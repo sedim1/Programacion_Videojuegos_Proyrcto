@@ -31,6 +31,8 @@ public:
     
     float Yaw;
     float Pitch;
+    int w;
+    int h;
     
     float MovementSpeed;
     float MouseSensitivity;
@@ -57,6 +59,10 @@ public:
     mat4 GetViewMatrix()
     {
         return lookAt(Position, Position + Front, Up);
+    }
+
+    mat4 GetProjectionMatrix(){
+        return perspective(radians(Zoom),(float)w/(float)h,0.01f,100.0f);
     }
 
     void ProcessKeyboard(Camera_Movement direction, float deltaTime)

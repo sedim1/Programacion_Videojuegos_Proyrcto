@@ -70,6 +70,10 @@ class Mesh{
 			vao.Delete();
 			ebo.Delete();
 			vbo.Delete();
+			for (int i = 0; i < textures.size(); i++) {
+				textures[i].Delete();
+			}
+			textures.clear();
 		}
 };
 
@@ -84,7 +88,6 @@ class Plane : public Mesh{
 			-1.0f,0.0f,-1.0f,  0.0f, 1.0f, 0.0f,1.0f,0.0f,
 			 1.0f,0.0f,-1.0f,  1.0f, 1.0f, 0.0f,1.0f,0.0f,
 		};
-		Plane() {}
 		Plane(float x,float z){
 			//Set indices
 			vector<unsigned int> faces = {0,1,2,1,2,3};
@@ -134,8 +137,7 @@ class Cube : public Mesh{
 		       -1.0f,-1.0f,1.0f,   0.0f, 1.0f, 0.0f,-1.0f,0.0f,
 		        1.0f,-1.0f,1.0f,   1.0f, 1.0f, 0.0f,-1.0f,0.0f,
 		};
-		Cube() {}
-		Cube(float x, float y, float z){
+		Cube(float x, float y, float z,string texPath = "TEXTURES\\sampler.jpg") {
 			vector<unsigned int>faces = {
 				0,1,2,
 				1,2,3,
@@ -156,7 +158,7 @@ class Cube : public Mesh{
 				buffer[i+2] *= z;
 			}
 			indices = faces;
-			textures.push_back(Texture("TEXTURES\\sampler.jpg",0,0));
+			textures.push_back(Texture(texPath.c_str(), 0, 0));
 			setUpPrimitive(buffer,indices);
 		}
 };
@@ -164,7 +166,6 @@ class Cube : public Mesh{
 class UvSphere : public Mesh{
 	public:
 		vector<float>buffer;
-		UvSphere() {}
 		UvSphere(float radius,int latitudes,int longitudes){ //Slices = longitudes, Stacks = latitudes
 			float deltaLongitude = 2 * M_PI / longitudes; //Slice angle step
 			float deltaLatitude = M_PI / latitudes; //Stack angle step
@@ -228,7 +229,6 @@ class UvSphere : public Mesh{
 class Capsule : public Mesh{
 	public:
 		vector<float>buffer;
-		Capsule() {}
 		//Quick note, radius must be half or less the height of the capsule
 		Capsule(float radius,float height,int latitudes,int longitudes){ //Slices = longitudes, Stacks = latitudes
 			float deltaLongitude = 2 * M_PI / longitudes; //Slice angle step

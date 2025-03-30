@@ -163,7 +163,9 @@
   <ItemGroup>
     <ClInclude Include="include\BO.h" />
     <ClInclude Include="include\Camera.h" />
+    <ClInclude Include="include\Entity.h" />
     <ClInclude Include="include\Mesh.h" />
+    <ClInclude Include="include\Scene3D.h" />
     <ClInclude Include="include\Shader.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\Texture.h" />

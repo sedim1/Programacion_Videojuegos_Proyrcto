@@ -6,6 +6,8 @@
 #include "Camera.h"
 #include "Transform.h"
 #include "Mesh.h"
+#include "Entity.h"
+#include "Scene3D.h"
 #include "Shader.h"
 
 
@@ -31,6 +33,7 @@ Shader objectShader;
 
 //Cameras
 Camera viewport;
+
 bool firstMouse = true;
 
 //Delta time
@@ -86,15 +89,18 @@ bool Init() {
 
     //Start shaders
     objectShader = Shader("SHADERS\\Primitives\\vertexShader.vs","SHADERS\\Primitives\\fragmentShader.fs");
+    //SetUp Scene
+
     return true;
 }
 
 void Update() {
-    Cube cube(1.0f,1.0f,1.0f);
-    cube.visibleTexture = true;
-    Transform transform;
+    //Cube cube(1.0f,1.0f,1.0f);
+    //cube.visibleTexture = true;
+    //Transform transform;
 
-    transform.translation.z = -6.0f;
+    Player player;
+    player.setShader(objectShader);
 
     float currentTime = 0.0f;
     float lastTime = 0.0f;
@@ -108,26 +114,14 @@ void Update() {
         // input
         processInput(window);
         viewportInput(window);
-        transform.rotation.y = (float)glfwGetTime() * 5.0f;
-        transform.rotation.x = (float)glfwGetTime() * 5.0f;
         // render
-        // ------
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        //Update view and projection
-        objectShader.use();
-        objectShader.setMat4("projection", perspective(radians(45.0f), (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f));
-        objectShader.setMat4("view", viewport.GetViewMatrix());
-        //Draw Object
-        objectShader.use();
-        objectShader.setMat4("model",transform.GetModelMatrix());
-        cube.drawMesh(objectShader);
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
+        player.Draw(viewport.GetViewMatrix(), perspective(radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f));
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    cube.Delete();
 }
 
 void Finish() {
