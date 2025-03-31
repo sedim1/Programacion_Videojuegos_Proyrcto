@@ -50,7 +50,6 @@ public:
 		mesh.drawMesh(shader);
 	}
 	void Update(float deltaTime) override {
-		std::cout << "up1" << std::endl;
 	}
 };
 
@@ -64,7 +63,6 @@ public:
 		mesh.visibleTexture = true;
 	}
 	void Update(float deltaTime) override {
-		std::cout << "up2" << std::endl;
 	}
 };
 #endif
