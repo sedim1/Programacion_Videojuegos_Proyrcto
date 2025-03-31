@@ -26,6 +26,10 @@ class Mesh{
 		vec4 albedo = vec4(1.0f,0.0f,0.0f,1.0f); //Mesh Color
 		bool visibleTexture = false;
 		void setUpMesh(){
+			vao.Generate();
+			vbo.Generate();
+			ebo.Generate();
+
 			vao.Bind();
 			vbo.MeshData(vertices);
 			ebo.IndexData(indices);
@@ -35,6 +39,9 @@ class Mesh{
 			ebo.Unbind();
 		}
 		void setUpPrimitive(vector<float>& data,vector<unsigned int>& faces){
+			vao.Generate();
+			vbo.Generate();
+			ebo.Generate();
 			vao.Bind();
 			vbo.Data(data);
 			ebo.IndexData(faces);
@@ -88,7 +95,7 @@ class Plane : public Mesh{
 			-1.0f,0.0f,-1.0f,  0.0f, 1.0f, 0.0f,1.0f,0.0f,
 			 1.0f,0.0f,-1.0f,  1.0f, 1.0f, 0.0f,1.0f,0.0f,
 		};
-		Plane(float x,float z){
+		Plane(float x,float z, string texPath = "TEXTURES\\sampler.jpg"){
 			//Set indices
 			vector<unsigned int> faces = {0,1,2,1,2,3};
 			indices = faces;
@@ -97,7 +104,10 @@ class Plane : public Mesh{
 				buffer[i] *= x;
 				buffer[i+2] *= z;
 			}
-			textures.push_back(Texture("TEXTURES\\sampler.jpg",0,0));
+			Texture texture;
+			texture.setTexture(texPath.c_str(), 0, 0);
+			textures.push_back(texture);
+			textures.push_back(texture);
 			setUpPrimitive(buffer,indices);
 		}
 };
@@ -158,7 +168,9 @@ class Cube : public Mesh{
 				buffer[i+2] *= z;
 			}
 			indices = faces;
-			textures.push_back(Texture(texPath.c_str(), 0, 0));
+			Texture texture;
+			texture.setTexture(texPath.c_str(), 0, 0);
+			textures.push_back(texture);
 			setUpPrimitive(buffer,indices);
 		}
 };
@@ -166,7 +178,7 @@ class Cube : public Mesh{
 class UvSphere : public Mesh{
 	public:
 		vector<float>buffer;
-		UvSphere(float radius,int latitudes,int longitudes){ //Slices = longitudes, Stacks = latitudes
+		UvSphere(float radius,int latitudes,int longitudes, string texPath = "TEXTURES\\sampler.jpg"){ //Slices = longitudes, Stacks = latitudes
 			float deltaLongitude = 2 * M_PI / longitudes; //Slice angle step
 			float deltaLatitude = M_PI / latitudes; //Stack angle step
 			float latitudeAngle; //phi
@@ -221,7 +233,9 @@ class UvSphere : public Mesh{
 					}
 				}
 			}
-			textures.push_back(Texture("TEXTURES\\sampler.jpg",0,0));
+			Texture texture;
+			texture.setTexture(texPath.c_str(), 0, 0);
+			textures.push_back(texture);
 			setUpPrimitive(buffer,indices);
 		}
 };
@@ -230,7 +244,7 @@ class Capsule : public Mesh{
 	public:
 		vector<float>buffer;
 		//Quick note, radius must be half or less the height of the capsule
-		Capsule(float radius,float height,int latitudes,int longitudes){ //Slices = longitudes, Stacks = latitudes
+		Capsule(float radius,float height,int latitudes,int longitudes,string texPath = "TEXTURES\\sampler.jpg"){ //Slices = longitudes, Stacks = latitudes
 			float deltaLongitude = 2 * M_PI / longitudes; //Slice angle step
 			float deltaLatitude = M_PI / latitudes; //Stack angle step
 			float latitudeAngle; //phi
@@ -293,9 +307,10 @@ class Capsule : public Mesh{
 					}
 				}
 			}
-			textures.push_back(Texture("TEXTURES\\sampler.jpg",0,0));
+			Texture texture;
+			texture.setTexture(texPath.c_str(), 0, 0);
+			textures.push_back(texture);
 			setUpPrimitive(buffer,indices);
 		}
 };
-
 #endif

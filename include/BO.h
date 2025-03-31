@@ -20,8 +20,9 @@ class VAO{
 	private:
 		unsigned int id = 0;
 	public:
-		VAO(){
-			glGenVertexArrays(1,&id);
+		VAO(){}
+		void Generate() {
+			glGenVertexArrays(1, &id);
 		}
 		void Delete(){
 			glDeleteVertexArrays(1,&id);
@@ -53,8 +54,9 @@ class VBO{
 	private:
 		unsigned int id = 0;
 	public:
-		VBO(){
-			glGenBuffers(1,&id);
+		VBO(){}
+		void Generate() {
+			glGenBuffers(1, &id);
 		}
 		void Data(vector<float>& vertices){//MANUAL DATA SET BY USER
 			glBindBuffer(GL_ARRAY_BUFFER,id);
@@ -80,8 +82,9 @@ class EBO{
 	private:
 		unsigned int id = 0;
 	public:
-		EBO(){
-			glGenBuffers(1,&id);
+		EBO(){}
+		void Generate() {
+			glGenBuffers(1, &id);
 		}
 		void IndexData(vector<unsigned int>& indices){
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,id);

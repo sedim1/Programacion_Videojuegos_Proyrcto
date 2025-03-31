@@ -12,10 +12,11 @@ using namespace std;
 
 class Texture{
 	public:
-                GLuint ID;
+                GLuint ID = 0;
                 GLuint unit;
-		Texture(const char* path,int e,GLuint unit){
-                        glGenTextures(1,&ID);
+        Texture() : ID(0), unit(0) {}
+		void setTexture(const char* path,int e,GLuint unit){
+            glGenTextures(1,&ID);
 			glBindTexture(GL_TEXTURE_2D,ID);
                         this->unit = unit;
 			//Set expansion mode
