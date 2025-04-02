@@ -28,6 +28,7 @@ GLFWwindow* window;
 
 //Shaders
 Shader objectShader;
+Shader modelShader;
 
 //Cameras
 Camera viewport;
@@ -95,6 +96,7 @@ Scene3D SetUpScene3D() {
     Scene3D gameScene;
     //Start shaders
     objectShader = Shader("SHADERS\\Primitives\\vertexShader.vs", "SHADERS\\Primitives\\fragmentShader.fs");
+    modelShader = Shader("SHADERS\\Model\\mvertexShader.vs", "SHADERS\\Model\\mfragmentShader.fs");
     //SetUp Scene
     //SetUp vieweport camera
     viewport.w = SCR_WIDTH;
@@ -107,7 +109,7 @@ Scene3D SetUpScene3D() {
     Player* player = new Player();
     MapPlane* map = new MapPlane();
     player->setShader(objectShader);
-    map->setShader(objectShader);
+    map->setShader(modelShader);
     gameScene = Scene3D(viewport,inGame);
     gameScene.addObjectToScene(player);
     gameScene.addObjectToScene(map);

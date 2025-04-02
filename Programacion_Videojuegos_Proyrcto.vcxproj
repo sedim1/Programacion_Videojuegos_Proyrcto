@@ -148,6 +148,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="SHADERS\Model\mfragmentShader.fs" />
+    <None Include="SHADERS\Model\mvertexShader.vs" />
     <None Include="SHADERS\Primitives\fragmentShader.fs">
       <DeploymentContent>true</DeploymentContent>
     </None>
@@ -165,6 +167,7 @@
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\Entity.h" />
     <ClInclude Include="include\Mesh.h" />
+    <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\Scene3D.h" />
     <ClInclude Include="include\Shader.h" />
     <ClInclude Include="include\stb_image.h" />

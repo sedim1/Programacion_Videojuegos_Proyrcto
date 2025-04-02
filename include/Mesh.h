@@ -24,7 +24,7 @@ class Mesh{
 		vector<unsigned int>indices;
 		vector<Texture>textures;
 		vec4 albedo = vec4(1.0f,0.0f,0.0f,1.0f); //Mesh Color
-		bool visibleTexture = false;
+		bool visibleTexture = true;
 		void setUpMesh(){
 			vao.Generate();
 			vbo.Generate();
@@ -72,6 +72,7 @@ class Mesh{
 			vao.Bind();
 			glDrawElements(GL_TRIANGLES,indices.size(),GL_UNSIGNED_INT,0);
 			vao.Unbind();
+			glActiveTexture(GL_TEXTURE0);
 		}
 		void Delete() {
 			vao.Delete();

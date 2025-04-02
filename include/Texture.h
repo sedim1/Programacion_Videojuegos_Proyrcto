@@ -69,10 +69,10 @@ class Texture{
         		}
         		stbi_image_free(data);
                 }
-                ~Texture(){}
-                void texUnit(Shader& shader,const string& uniform,int u){
-                        shader.setInt(uniform,u);
-                }
+        ~Texture(){}
+        void texUnit(Shader& shader,const string& uniform,int u){
+             shader.setInt(uniform,u);
+        }
 		void BindTexture(Shader& program){
                         glActiveTexture(GL_TEXTURE0 + unit);
                         glBindTexture(GL_TEXTURE_2D,ID);

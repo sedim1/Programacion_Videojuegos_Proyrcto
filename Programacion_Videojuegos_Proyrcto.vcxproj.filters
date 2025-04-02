@@ -22,6 +22,12 @@
     <None Include="SHADERS\Primitives\fragmentShader.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="SHADERS\Model\mfragmentShader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SHADERS\Model\mvertexShader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Scene3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
